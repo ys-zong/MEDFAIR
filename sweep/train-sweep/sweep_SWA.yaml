@@ -1,0 +1,46 @@
+program: main.py
+command:
+    - ${env}
+    - python
+    - ${program}
+    - ${args}
+    - "--experiment"
+    - "SWA"
+    - "--hyper_search"
+    - "True"
+    
+method: bayes
+metric:
+    name: Validation loss
+    goal: minimize 
+parameters:
+    swa_start:
+        values:
+        - 5
+        - 7
+        - 10
+    swa_lr:
+        values:
+        - 0.1
+        - 0.05
+        - 0.01
+        - 0.005
+        - 0.0001
+    swa_annealing_epochs:
+        values:
+        - 0
+        - 3
+        - 5
+        - 7
+    lr:
+        distribution: uniform
+        min: 1e-5
+        max: 1e-3
+    weight_decay:
+        value: 1e-5
+    #batch_size:
+    #    values:
+    #    - 1024
+    total_epochs:
+        value: 20
+        

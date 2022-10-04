@@ -1,24 +1,18 @@
-# MEDFAIR: Benchmarking Fairness for Medical Imaging
-MEDFAIR is a fairness benchmarking suite for medical imaging ([paper]()). We are actively updating this repo and will incorporate more datasets and algorithms in the future. Contributions are warmly welcomed!
+# Quick Start
 
-
-## Documentation
-A detailed documentation can be found [here](docs/index.md).
-
-## Quick Start
-
-### Installation
-Python >= 3.7+ and Pytorch >=1.10 are required for running the code. Other necessary packages are listed in [`environment.yml`](../environment.yml).
+## Installation
+Python >= 3.8+ and Pytorch >=1.10 are required for running the code. Other necessary packages are listed in [`environment.yml`](../environment.yml).
 
 ### Installation via conda:
 ```python
 cd MEDFAIR/
-conda env create -n fair_benchmark -f environment.yml
-conda activate fair_benchmark
+conda env create -n medfair_env -f environment.yml
+conda activate medfair_env
 ```
 
-### Dataset
-Due to the data use agreements, we cannot directly share the download link. Please register and download datasets using the links from the table below:
+## Dataset Download
+Due to the data use agreements, we cannot directly share the download link. Please follow the instructions and download datasets via links from the table below:
+
 
 | **Dataset**  | **Access**                                                                                    |
 |--------------|-----------------------------------------------------------------------------------------------|
@@ -33,8 +27,10 @@ Due to the data use agreements, we cannot directly share the download link. Plea
 | ADNI 1.5T/3T | https://ida.loni.usc.edu/login.jsp?project=ADNI                                               | 
 
 
-### Data Preprocessing
-See `preprocessing/HAM10000.ipynb` for an simple example of how to preprocess the data into desired format.
+## Usage
+
+### Dataset Preprocessing
+See `notebooks/HAM10000.ipynb` for an simple example of how to preprocess the data into desired format.
 Basically, it contains 3 steps:
 1. Preprocess metadata.
 2. Split to train/val/test set
@@ -58,12 +54,8 @@ python sweep/train-sweep/sweep_batch.py
 ```
 
 
-### Model selection and Results analysis
+## Model selection and Results analysis
 See `notebooks/results_analysis.ipynb` for a step by step example.
 
-## Citation
-Please consider cite our paper if you find this repo useful.
-
-
-## Acknowledgement
-MEDFAIR adapts implementations from many repos (check [here](docs/reference.md#debiasing-methods) for the original implementation of the algorithms), as well as many other codes. Many thanks!
+## Tabular data
+We also implement these algorithms with a three-layer Multi-Layer Perceptron (MLP) as the backbone to explore the tabular data (This is not introduced in the paper). You can use the tabular mode with the parse argument `cusMLP` and `is_tabular`.

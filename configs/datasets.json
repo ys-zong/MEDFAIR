@@ -1,0 +1,81 @@
+{
+    "CXP":
+    {
+        "image_feature_path": "yourpath",
+            "pickle_train_path": "yourpath",
+            "pickle_val_path": "yourpath",
+            "pickle_test_path": "yourpath",
+            
+            "train_meta_path": "yourpath",
+            "val_meta_path": "yourpath",
+            "test_meta_path": "yourpath"
+    },
+    "MIMIC_CXR":
+    {
+        "image_feature_path": "yourpath",
+        "pickle_train_path": "yourpath",
+        "pickle_val_path": "yourpath",
+        "pickle_test_path": "yourpath",
+        "train_meta_path": "yourpath",
+        "val_meta_path": "yourpath",
+        "test_meta_path": "yourpath"
+    },
+    "PAPILA":
+    {
+        "image_feature_path": "yourpath",
+        "pickle_train_path": "yourpath",
+        "pickle_val_path": "yourpath",
+        "pickle_test_path": "yourpath",
+        "train_meta_path": "yourpath",
+        "val_meta_path": "yourpath",
+        "test_meta_path": "yourpath"
+    },
+    "OCT":
+    {
+        "image_feature_path": "yourpath",
+        "train_meta_path": "yourpath",
+        "val_meta_path": "yourpath",
+        "test_meta_path": "yourpath"
+    },
+    "HAM10000":
+    {
+        "image_feature_path": "yourpath",
+        "pickle_train_path": "yourpath",
+        "pickle_val_path": "yourpath",
+        "pickle_test_path": "yourpath",
+        "train_meta_path": "yourpath",
+        "val_meta_path": "yourpath",
+        "test_meta_path": "yourpath"
+    },
+    "Fitz17k":
+    {
+        "image_feature_path": "yourpath",
+        "pickle_train_path": "yourpath",
+        "pickle_val_path": "yourpath",
+        "pickle_test_path": "yourpath",
+        "train_meta_path": "yourpath",
+        "val_meta_path": "yourpath",
+        "test_meta_path": "yourpath"
+    },
+    "ADNI":
+    {
+        "image_feature_path": "yourpath",
+        "train_meta_path": "yourpath",
+        "val_meta_path": "yourpath",
+        "test_meta_path": "yourpath"
+    },
+    "ADNI3T":
+    {
+        "image_feature_path": "yourpath",
+        "train_meta_path": "yourpath",
+        "val_meta_path": "yourpath",
+        "test_meta_path": "yourpath"
+    },
+    "COVID_CT_MD":
+    {
+        "image_feature_path": "yourpath",
+        "train_meta_path": "yourpath",
+        "val_meta_path": "yourpath",
+        "test_meta_path": "yourpath"
+    }
+}

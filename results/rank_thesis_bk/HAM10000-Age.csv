@@ -1,0 +1,8 @@
+methods,Test Overall AUC,Test Overall Acc,Test acc-group_0,Test acc-group_1,Test auc-group_1,Test acc-group_2,Test auc-group_2,Test acc-group_3,Test auc-group_3,Test acc-group_4,Test auc-group_4,Test Overall FPR,Test Overall FNR,Test FPR-group_0,Test FPR-group_1,Test FPR-group_2,Test FPR-group_3,Test FPR-group_4,Test FNR-group_1,Test FNR-group_2,Test FNR-group_3,Test FNR-group_4
+baseline,1.0,3.0,4.0,6.0,6.0,4.0,1.0,1.0,1.0,2.5,2.5,4.0,6.0,4.0,2.0,4.0,6.0,4.5,2.0,7.0,6.0,4.5
+resampling,6.0,5.0,2.0,5.0,3.0,5.0,5.0,5.0,5.0,6.0,6.0,3.0,3.0,6.0,3.0,3.0,2.0,2.5,4.5,3.0,3.0,3.0
+DomainInd,3.0,1.0,2.0,1.5,7.0,3.0,6.0,2.0,2.0,4.0,1.0,6.0,4.0,6.0,7.0,6.0,4.5,2.5,1.0,2.0,5.0,7.0
+LNL,2.0,7.0,7.0,1.5,1.0,7.0,4.0,7.0,3.0,7.0,5.0,1.0,7.0,1.0,5.5,1.0,1.0,1.0,7.0,4.0,7.0,6.0
+EnD,7.0,4.0,5.5,3.0,2.0,2.0,2.0,6.0,7.0,5.0,7.0,5.0,2.0,2.5,4.0,5.0,4.5,6.0,6.0,5.5,2.0,1.0
+ODR,4.0,6.0,5.5,7.0,4.0,6.0,3.0,4.0,4.0,2.5,2.5,2.0,5.0,2.5,1.0,2.0,3.0,4.5,4.5,5.5,4.0,4.5
+GroupDRO,5.0,2.0,2.0,4.0,5.0,1.0,7.0,3.0,6.0,1.0,4.0,7.0,1.0,6.0,5.5,7.0,7.0,7.0,3.0,1.0,1.0,2.0
