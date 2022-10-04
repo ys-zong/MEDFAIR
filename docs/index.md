@@ -1,4 +1,4 @@
-# Welcome to the tutorial of the biomedical fairness benchmark! 
+# Welcome to the documentation of MEDFAIR.
 
 ## Quick Start
 - [Installation](quickstart.md#installation)
