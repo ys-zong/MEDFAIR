@@ -3,12 +3,12 @@ MEDFAIR is a fairness benchmarking suite for medical imaging ([paper]()). We are
 
 
 ## Documentation
-A detailed documentation can be found [here](docs/index.md).
+A detailed documentation can be found [here](https://ys-zong.github.io/MEDFAIR/).
 
 ## Quick Start
 
 ### Installation
-Python >= 3.7+ and Pytorch >=1.10 are required for running the code. Other necessary packages are listed in [`environment.yml`](../environment.yml).
+Python >= 3.8+ and Pytorch >=1.10 are required for running the code. Other necessary packages are listed in [`environment.yml`](../environment.yml).
 
 ### Installation via conda:
 ```python
