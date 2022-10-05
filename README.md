@@ -1,5 +1,5 @@
 # MEDFAIR: Benchmarking Fairness for Medical Imaging
-MEDFAIR is a fairness benchmarking suite for medical imaging ([paper]()). We are actively updating this repo and will incorporate more datasets and algorithms in the future. Contributions are warmly welcomed!
+MEDFAIR is a fairness benchmarking suite for medical imaging ([paper](https://arxiv.org/abs/2210.01725)). We are actively updating this repo and will incorporate more datasets and algorithms in the future. Contributions are warmly welcomed!
 
 
 ## Documentation
@@ -63,7 +63,14 @@ See `notebooks/results_analysis.ipynb` for a step by step example.
 
 ## Citation
 Please consider cite our paper if you find this repo useful.
-
+```
+@misc{2210.01725,
+Author = {Yongshuo Zong and Yongxin Yang and Timothy Hospedales},
+Title = {MEDFAIR: Benchmarking Fairness for Medical Imaging},
+Year = {2022},
+Eprint = {arXiv:2210.01725},
+}
+```
 
 ## Acknowledgement
 MEDFAIR adapts implementations from many repos (check [here](docs/reference.md#debiasing-methods) for the original implementation of the algorithms), as well as many other codes. Many thanks!
