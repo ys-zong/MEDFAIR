@@ -1,9 +1,9 @@
 # MEDFAIR: Benchmarking Fairness for Medical Imaging
-MEDFAIR is a fairness benchmarking suite for medical imaging ([paper](https://arxiv.org/abs/2210.01725)). We are actively updating this repo and will incorporate more datasets and algorithms in the future. Contributions are warmly welcomed!
+MEDFAIR is a fairness benchmarking suite for medical imaging ([paper](https://arxiv.org/abs/2210.01725)). We are actively updating this repo and will incorporate more datasets and algorithms in the future. Contributions are warmly welcomed! Visit our [website](https://ys-zong.github.io/MEDFAIR/).
 
 
 ## Documentation
-A detailed documentation can be found [here](https://ys-zong.github.io/MEDFAIR/).
+A detailed documentation can be found [here](https://github.com/ys-zong/MEDFAIR/blob/main/docs/index.md).
 
 ## Quick Start
 
