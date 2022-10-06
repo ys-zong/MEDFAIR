@@ -124,7 +124,7 @@
 	<meta property="og:description" content="Paper description." />
 
 	<!-- Get from Google Analytics -->
-	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- Global site tag(gtag.js) - Google Analytics -->
 	<script async src=""></script> 
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -138,23 +138,25 @@
 <body>
 	<br>
 	<center>
-		<span style="font-size:36px">Creative and Descriptive Paper Title</span>
+		<span style="font-size:36px">MEDFAIR: Benchmarking Fairness for Medical Imaging</span>
+		<br>
+		<span style="font-size:14px">TL;DR: We develop a fairness benchmark for medical imaging and find that no method significantly outperforms ERM.</span>
 		<table align=center width=600px>
 			<table align=center width=600px>
 				<tr>
 					<td align=center width=100px>
 						<center>
-							<span style="font-size:24px"><a href="https://en.wikipedia.org/wiki/James_J._Gibson">First Author</a></span>
+							<span style="font-size:24px"><a href="https://ys-zong.github.io/">Yongshuo Zong</a></span>
 						</center>
 					</td>
 					<td align=center width=100px>
 						<center>
-							<span style="font-size:24px"><a href="https://en.wikipedia.org/wiki/James_J._Gibson">Second Author</a></span>
+							<span style="font-size:24px"><a href="https://yang.ac/">Yongxin Yang</a></span>
 						</center>
 					</td>
 					<td align=center width=100px>
 						<center>
-							<span style="font-size:24px"><a href="https://en.wikipedia.org/wiki/James_J._Gibson">Third Author</a></span>
+							<span style="font-size:24px"><a href="https://homepages.inf.ed.ac.uk/thospeda/index.html">Timothy Hospedales</a></span>
 						</center>
 					</td>
 				</tr>
@@ -163,36 +165,35 @@
 				<tr>
 					<td align=center width=120px>
 						<center>
-							<span style="font-size:24px"><a href=''>[Paper]</a></span>
+							<span style="font-size:24px"><a href='https://arxiv.org/abs/2210.01725'>[Paper]</a></span>
 						</center>
 					</td>
 					<td align=center width=120px>
 						<center>
-							<span style="font-size:24px"><a href='https://github.com/richzhang/webpage-template'>[GitHub]</a></span><br>
+							<span style="font-size:24px"><a href='https://github.com/ys-zong/MEDFAIR'>[GitHub]</a></span><br>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href='https://github.com/ys-zong/MEDFAIR/blob/main/docs/index.md'>[Docs]</a></span><br>
 						</center>
 					</td>
 				</tr>
 			</table>
 		</table>
 	</center>
-
+<br>
 	<center>
-		<table align=center width=850px>
+		<table align=center width=800px>
 			<tr>
 				<td width=260px>
 					<center>
-						<img class="round" style="width:500px" src="./resources/teaser.png"/>
+						<img class="round" style="width:800px" src="./resources/pipeline.png"/>
 					</center>
 				</td>
 			</tr>
 		</table>
-		<table align=center width=850px>
-			<tr>
-				<td>
-					This was a template originally made for <a href="http://richzhang.github.io/colorization/">Colorful Image Colorization</a>. The code can be found in this <a href="https://github.com/richzhang/webpage-template">repository</a>.
-				</td>
-			</tr>
-		</table>
+		
 	</center>
 
 	<hr>
@@ -201,12 +202,12 @@
 		<center><h1>Abstract</h1></center>
 		<tr>
 			<td>
-				This is my abstract.
+				A multitude of work has shown that machine learning-based medical diagnosis systems can be biased against certain subgroups of people. This has motivated a growing number of bias mitigation algorithms that aim to address fairness issues in machine learning. However, it is difficult to compare their effectiveness in medical imaging for two reasons. First, there is little consensus on the criteria to assess fairness. Second, existing bias mitigation algorithms are developed under different settings, e.g., datasets, model selection strategies, backbones, and fairness metrics, making a direct comparison and evaluation based on existing results impossible. In this work, we introduce MEDFAIR, a framework to benchmark the fairness of machine learning models for medical imaging. MEDFAIR covers eleven algorithms from various categories, nine datasets from different imaging modalities, and three model selection criteria. Through extensive experiments, we find that the under-studied issue of model selection criterion can have a significant impact on fairness outcomes; while in contrast, state-of-the-art bias mitigation algorithms do not significantly improve fairness outcomes over empirical risk minimization(ERM) in both in-distribution and out-of-distribution settings. We evaluate fairness from various perspectives and make recommendations for different medical application scenarios that require different ethical principles. Our framework provides a reproducible and easy-to-use entry point for the development and evaluation of future bias mitigation algorithms in deep learning.
 			</td>
 		</tr>
 	</table>
 	<br>
-
+    <!--
 	<hr>
 	<center><h1>Talk</h1></center>
 	<p align="center">
@@ -223,59 +224,278 @@
 		</tr>
 	</table>
 	<hr>
+-->
+	<center><h1>Motivation</h1></center>
 
-	<center><h1>Code</h1></center>
-
-	<table align=center width=420px>
-		<center>
-			<tr>
-				<td>
-				</td>
-			</tr>
-		</center>
-	</table>
-	<table align=center width=400px>
-		<tr>
-			<td align=center width=400px>
-				<center>
-					<td><img class="round" style="width:450px" src="./resources/method_diagram.png"/></td>
-				</center>
-			</td>
-		</tr>
-	</table>
+		
 	<table align=center width=850px>
 		<center>
 			<tr>
 				<td>
-					Short description if wanted
+					Machine learning (ML) models have been found to demonstrate a systematic bias
+toward certain groups of people defined by race, gender, age, and even the health insurance type with worse performance [2][3][4]. 
+The bias also exists in different types of medical data, such as chest X-ray, CT scans, skin dermatology, etc. A biased decision-making system
+is socially and ethically detrimental, especially in life-changing scenarios such as healthcare. Given the importance of ensuring fairness in medical applications and the special characteristics of medical data, we
+argue that a systematic and rigorous benchmark is needed to evaluate the bias mitigation algorithms for medical imaging.
 				</td>
 			</tr>
 		</center>
 	</table>
-	<table align=center width=800px>
-		<br>
-		<tr><center>
-			<span style="font-size:28px">&nbsp;<a href='https://github.com/richzhang/webpage-template'>[GitHub]</a>
-			</center>
-		</span>
-	</table>
+	
 	<br>
+	<!--
 	<hr>
 	<table align=center width=450px>
 		<center><h1>Paper and Supplementary Material</h1></center>
 		<tr>
 			<td><a href=""><img class="layered-paper-big" style="height:175px" src="./resources/paper.png"/></a></td>
 			<td><span style="font-size:14pt">F. Author, S. Author, T. Author.<br>
-				<b>Creative and Descriptive Paper Title.</b><br>
+				<b>MEDFAIR: Benchmarking Fairness for Medical Imaging.</b><br>
 				In Conference, 20XX.<br>
 				(hosted on <a href="">ArXiv</a>)<br>
-				<!-- (<a href="./resources/camera-ready.pdf">camera ready</a>)<br> -->
 				<span style="font-size:4pt"><a href=""><br></a>
 				</span>
 			</td>
 		</tr>
 	</table>
 	<br>
+-->
+<hr>
+<center><h1>Bias widely exists in ML models</h1></center>
+		
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+					Firstly, we train ERM on different datasets and sensitive attributes, and select models using the regular overall
+performance-based strategy. For each dataset and sensitive attribute, we calculate the maximum and minimum AUC
+and underdiagnosis rate among subgroups, where we use FNR for malignant label and FPR for "No Finding" label
+as the underdiagnosis rate.  This confirms a problem that has been widely discussed [1] but, until now, has never been systematically quantified for deep learning across a comprehensive variety of modalities,
+diagnosis tasks, and sensitive attributes.
+				</td>
+			</tr>
+		</center>
+	</table>
+	<table align=center width=850px>
+		<tr>
+			<td width=850px>
+				<center>
+					<img class="round" style="width:850px" src="./resources/bias_exists.png"/>
+				</center>
+			</td>
+		</tr>
+	</table>
+		
+
+	<br>
+
+	<hr>
+	<center><h1>Model selection strategies
+	</h1></center>
+			
+		<table align=center width=850px>
+			<center>
+				<tr>
+					<td>
+						The trade-off between fairness and utility has been widely noted [5][6], making
+hyper-parameter selection criteria particularly difficult to define given the multi-objective nature of optimising for
+potentially conflicting fairness and utility. Previous work differs greatly in model selection. Some use conventional
+utility-based selection strategies, e.g., overall validation loss, while others have no explicit specification. To investigate the influence of model selection
+strategies on the final performance, we study three prevalent selection strategies in MEDFAIR, i.e. overall performance-based, Minimax Pareto selection, and Distance to Optimal (DTO).
+					</td>
+				</tr>
+			</center>
+		</table>
+		<table align=center width=750px>
+			<tr>
+				<td width=850px>
+					<center>
+						<img class="round" style="width:750px" src="./resources/model_selection.png"/>
+					</center>
+				</td>
+			</tr>
+		</table>
+			
+	
+		<br>
+
+
+	<hr>
+	<center><h1>Model selection matters</h1></center>
+			
+		<table align=center width=850px>
+			<center>
+				<tr>
+					<td>
+						We conduct a hyper-parameter sweep for ERM while
+training on all the datasets, and then compute the metrics and the relative ranks of the three model selection strategies.
+The results, including statistical significance tests are summarised in the Figure below.  Selection strategies not connected by the bold bars have
+significantly different performance. The results show that for the worst-case AUC metric(left), the Pareto-optimal
+model selection strategy is statistically significantly better than the overall AUC model selection strategy. Meanwhile, in terms of the overall AUC metric
+(right) the Pareto selection strategy is not significantly worse than the overall model selection strategy. Thus, <em>even
+without any explicit bias mitigation algorithm, max-min fairness can be significantly improved simply by adopting the
+corresponding model selection strategy in place of the standard overall strategy - and this intervention need not impose
+a significant cost to the overall AUC.</em>
+					</td>
+				</tr>
+			</center>
+		</table>
+		<table align=center width=850px>
+			<tr>
+				<td width=850px>
+					<center>
+						<img class="round" style="width:850px" src="./resources/selection_ERM.png"/>
+					</center>
+				</td>
+			</tr>
+		</table>
+			
+	
+		<br>
+
+
+		<hr>
+	<center><h1>No method outperforms ERM with statistical significance
+	</h1></center>
+			
+		<table align=center width=850px>
+			<center>
+				<tr>
+					<td>
+						We next ask whether any of the purpose-designed bias mitigation algorithms is significantly better than ERM, and
+which algorithm is best overall? We report the Nemenyi post-hoc test results on worst-group AUC, AUC gap, and overall AUC
+in Figure 5 for in-distribution(top row) and out-of-distribution(bottom row) settings.
+For in-distribution, while there are some significant performance differences, no method outperforms ERM significantly
+for any metric: ERM is always in the highest rank group of algorithms without significant differences. The conclusion
+is the same for the out-of-distribution testing, and some methods that rank higher than ERM in the in-distribution setting
+perform worse than ERM when deployed to an unseen domain, suggesting that preserving fairness across domain-shift
+is challenging.
+					</td>
+				</tr>
+			</center>
+		</table>
+		<table align=center width=850px>
+			<tr>
+				<td width=850px>
+					<center>
+						<img class="round" style="width:850px" src="./resources/id_ood.png"/>
+					</center>
+				</td>
+			</tr>
+		</table>
+			
+	
+		<br>
+
+<hr>
+
+
+
+<center><h1>MEDFAIR as an easy-to-use codebase
+</h1></center>
+		
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+					We implement MEDFAIR using PyTorch framework. We show example codes to demonstrate how to incorporate new
+			datasets and algorithms. A detailed documentation can be found here.
+				</td>
+			</tr>
+		</center>
+	</table>
+	<center><h2>Adding new datasets
+	</h2></center>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+					We implement a base dataset class BaseDataset, and new dataset can be added by creating a new file and inheriting it.
+				</td>
+			</tr>
+		</center>
+	</table>
+	
+	<head>
+		<link rel="stylesheet"
+			  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	  </head>
+	  <body>
+		<pre><code class="python">
+		from datasets.BaseDataset import BaseDataset
+		class DatasetX(BaseDataset):
+			def __init__(self, metadata, path_to_images, sens_name, transform):
+				super(DatasetX, self).__init__(metadata, sens_name, transform)
+
+			def __getitem__(self, idx):
+				item = self.metadata.iloc[idx]
+				img = Image.open(path_to_images[idx])
+				# apply image transform / augmentation
+				img = self.transform(img)
+				label = torch.FloatTensor([int(item['binaryLabel'])])
+				# convert to sensitive attributes to numerical values
+				sensitive = self.get_sensitive(self.sens_name, self.sens_classes, item)
+				return idx, img, label, sensitive
+</code></pre>
+	  </body>
+		
+
+	<br>
+
+	<center><h2> Adding new algorithm
+	</h2></center>
+	<table align=center width=850px>
+		<center>
+			<tr>
+				<td>
+					We implement a base algorithm class BaseNet, where contains basic configuration and regular training/validation/testing
+loop. A new algorithm can be added by inheriting it and rewriting the training loop, loss, etc. if needed.
+<br>
+For example, SAM [7] algorithm can be added by re-implementing the training loop.
+
+</td>
+			</tr>
+		</center>
+	</table>
+	
+	<head>
+		<link rel="stylesheet"
+			  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	  </head>
+	  <body>
+		<pre ><code class="python">
+		class SAM(BaseNet):
+			def __init__(self, opt, wandb):
+				super(SAM, self).__init__(opt, wandb)
+			
+			def train(self, loader):
+				self.network.train()
+				for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+					enable_running_stats(self.network)
+					outputs, _ = self.network(images)
+					loss = self._criterion(outputs, targets)
+					loss.mean().backward()
+					self.optimizer.first_step(zero_grad = True)
+					self.scheduler.step()
+					disable_running_stats(self.network)
+					outputs, _ = self.network(images)
+					self._criterion(outputs, targets).mean().backward()
+					self.optimizer.second_step(zero_grad = True)
+					self.scheduler.step()
+			
+</code></pre>
+	  </body>
+		
+
+	<br>
+
+<hr>
+	<center><h2>Citation
+	</h2></center>
 
 	<table align=center width=600px>
 		<tr>
@@ -285,21 +505,56 @@
 		</tr>
 	</table>
 
-	<hr>
+	
 	<br>
-
-	<table align=center width=900px>
-		<tr>
-			<td width=400px>
-				<left>
-					<center><h1>Acknowledgements</h1></center>
-					This template was originally made by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a> for a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project; the code can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
-				</left>
-			</td>
-		</tr>
-	</table>
 
 <br>
 </body>
 </html>
 
+
+<hr>
+	<br>
+
+  	  <a name="Reference"></a>
+  	  <table align=center width=850>
+  		  <tr>
+  	          <td width=850px>
+  				<left>
+		  <center><h1>Reference</h1></center>
+		  <font size="-3">
+				[1] Seyyed-Kalantari, Laleh, et al. "Underdiagnosis bias of artificial intelligence algorithms applied to chest radiographs in under-served patient populations." Nature medicine 27.12(2021): 2176-2182. <br>
+			    [2] Obermeyer, Ziad, et al. "Dissecting racial bias in an algorithm used to manage the health of populations." Science 366.6464 (2019): 447-453. <br>
+                [3] Larrazabal, Agostina J., et al. "Gender imbalance in medical imaging datasets produces biased classifiers for computer-aided diagnosis." Proceedings of the National Academy of Sciences 117.23 (2020): 12592-12594. <br>
+				[4] Spencer, Christine S., Darrell J. Gaskin, and Eric T. Roberts. "The quality of care delivered to patients within the same hospital varies by insurance type." Health Affairs 32.10 (2013): 1731-1739. <br>
+				[5] Kleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. "Inherent trade-offs in the fair determination of risk scores." arXiv preprint arXiv:1609.05807 (2016). <br>
+				[6] Zietlow, Dominik, et al. "Leveling Down in Computer Vision: Pareto Inefficiencies in Fair Deep Classifiers." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2022. <br>
+				[7] Foret, Pierre, et al. "Sharpness-aware minimization for efficiently improving generalization." arXiv preprint arXiv:2010.01412 (2020).
+			</font>
+			</left>
+			</td>
+		 </tr>
+	 </table>
+
+	 <hr>
+	 <br>
+ 
+		 <a name="Acknowledgement"></a>
+		 <table align=center width=850>
+			 <tr>
+				 <td width=850px>
+				   <left>
+		   <center><h1>Acknowledgement</h1></center>
+		   <font size="-3">
+		   Yongshuo Zong is supported by the United Kingdom Research and Innovation (grant EP/S02431X/1), UKRI Centre for
+		   Doctoral Training in Biomedical AI at the University of Edinburgh, School of Informatics. For the purpose of open
+		   access, the author has applied a creative commons attribution (CC BY) licence to any author accepted manuscript
+		   version arising.
+		
+		   <br>
+		   This webpage template is adapted from <a href="https://github.com/richzhang/webpage-template">here</a>.
+		</font>
+		        </left>
+			 </td>
+		  </tr>
+	  </table>

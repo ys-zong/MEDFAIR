@@ -1,6 +1,6 @@
-@inproceedings{author20XXtitle,
-  title={Please cite me},
-  author={Author, First and Author, Second and Author, Third},
-  booktitle={Conference},
-  year={20XX}
+@misc{2210.01725,
+Author = {Yongshuo Zong and Yongxin Yang and Timothy Hospedales},
+Title = {MEDFAIR: Benchmarking Fairness for Medical Imaging},
+Year = {2022},
+Eprint = {arXiv:2210.01725},
 }
