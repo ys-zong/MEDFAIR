@@ -12,7 +12,7 @@ from itertools import islice
 
 _pair = _ntuple(2)
 
-__all__ = ['cusResNet18dsbn', 'resnet34dsbn', 'resnet50dsbn', 'resnet101dsbn', 'resnet152dsbn']
+__all__ = ['cusResNet18dsbn', 'cusResNet34dsbn', 'cusResNet50dsbn', 'cusResNet101dsbn', 'cusResNet152dsbn']
 
 model_urls = {
     'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
@@ -122,7 +122,7 @@ def cusResNet18dsbn(pretrained=False, **kwargs):
     return model
 
 
-def resnet34dsbn(pretrained=False, **kwargs):
+def cusResNet34dsbn(pretrained=False, **kwargs):
     """Constructs a ResNet-34 model.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
@@ -136,7 +136,7 @@ def resnet34dsbn(pretrained=False, **kwargs):
 
     return model
 
-def resnet50dsbn(pretrained=False, **kwargs):
+def cusResNet50dsbn(pretrained=False, **kwargs):
     """Constructs a ResNet-50 model.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
@@ -151,7 +151,7 @@ def resnet50dsbn(pretrained=False, **kwargs):
     return model
 
 
-def resnet101dsbn(pretrained=False, **kwargs):
+def cusResNet101dsbn(pretrained=False, **kwargs):
     """Constructs a ResNet-101 model.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
@@ -166,7 +166,7 @@ def resnet101dsbn(pretrained=False, **kwargs):
     return model
 
 
-def resnet152dsbn(pretrained=False, **kwargs):
+def cusResNet152dsbn(pretrained=False, **kwargs):
     """Constructs a ResNet-101 model.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
