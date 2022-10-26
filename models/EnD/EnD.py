@@ -110,7 +110,7 @@ class EnD(BaseNet):
 
                     other_bias_mask = (bias_labels == other_bias_class).type(torch.float).unsqueeze(dim=1)
                     mask = torch.tril(
-                        torch.mm(class_mask * bias_mask, torch.transpose(class_mask * other_bias_mask, 0, 1)),
+                        torch.mm((class_mask * bias_mask).squeeze(), (torch.transpose(class_mask * other_bias_mask, 0, 1)).squeeze()),
                         diagonal=-1)
                     M = mask.sum()
                     M_tot += M
