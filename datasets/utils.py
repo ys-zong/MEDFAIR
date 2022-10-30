@@ -73,7 +73,7 @@ def get_dataset(opt):
     
     g = torch.Generator()
     g.manual_seed(opt['random_seed'])
-    def seed_worker():
+    def seed_worker(worker_id):
         np.random.seed(opt['random_seed'] )
         random.seed(opt['random_seed'])
         
