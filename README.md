@@ -2,7 +2,7 @@
 
 MEDFAIR is a fairness benchmarking suite for medical imaging ([paper](https://arxiv.org/abs/2210.01725)). We are actively updating this repo and will incorporate more datasets and algorithms in the future. Contributions are warmly welcomed! Visit our [website](https://ys-zong.github.io/MEDFAIR/).
 
-:grinning: MEDFAIR is accepted to ICLR'23 as Spolight!
+:grinning: MEDFAIR is accepted to ICLR'23 as Spotlight!
 
 A few updates coming soon!
 - [ ] Even simpler interface
