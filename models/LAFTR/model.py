@@ -31,8 +31,12 @@ class LaftrNet(nn.Module):
         self.discriminator = nn.ModuleList([nn.Linear(self.adv_neurons[i], self.adv_neurons[i + 1])
                                                          for i in range(self.num_adversaries_layers -1)])
 
-    def forward(self, X, Y):
+    def forward(self, X, Y=None):
         Y_logits, Z = self.net(X)
+        if Y is None:
+            # for inference
+            return Y_logits, Z
+
         if self.model_var != "laftr-dp":
             Z = torch.cat(
                 [Z, torch.unsqueeze(Y[:, 0].type(torch.FloatTensor), 1).to(self.device)],
@@ -78,8 +82,11 @@ class LaftrNet3D(nn.Module):
         self.discriminator = nn.ModuleList([nn.Linear(self.adv_neurons[i], self.adv_neurons[i + 1])
                                                          for i in range(self.num_adversaries_layers -1)])
 
-    def forward(self, X, Y):
+    def forward(self, X, Y=None):
         Y_logits, Z = self.net(X)
+        if Y is None:
+            # for inference
+            return Y_logits, Z
         if self.model_var != "laftr-dp":
             Z = torch.cat(
                 [Z, torch.unsqueeze(Y[:, 0].type(torch.FloatTensor), 1).to(self.device)],
@@ -127,8 +134,11 @@ class LaftrNet_MLP(nn.Module):
         self.discriminator = nn.ModuleList([nn.Linear(self.adv_neurons[i], self.adv_neurons[i + 1])
                                                          for i in range(self.num_adversaries_layers -1)])
 
-    def forward(self, X, Y):
+    def forward(self, X, Y=None):
         Y_logits, Z = self.net(X)
+        if Y is None:
+            # for inference
+            return Y_logits, Z
         if self.model_var != "laftr-dp":
             Z = torch.cat(
                 [Z, torch.unsqueeze(Y[:, 0].type(torch.FloatTensor), 1).to(self.device)],
