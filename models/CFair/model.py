@@ -42,9 +42,12 @@ class CFairNet(nn.Module):
                                           for _ in range(self.used_classes)])
         self.sensitive_cls = nn.ModuleList([nn.Linear(self.num_adversaries[-1], 2) for _ in range(self.used_classes)])
         
-    def forward(self, inputs, labels):
+    def forward(self, inputs, labels=None):
         h_relu = inputs
         outputs, features = self.net(h_relu)
+        if labels is None:
+            # for inference
+            return outputs, features
         h_relu = F.relu(features)
         
         # Adversary classification component.
@@ -84,9 +87,12 @@ class CFairNet3D(nn.Module):
                                           for _ in range(self.used_classes)])
         self.sensitive_cls = nn.ModuleList([nn.Linear(self.num_adversaries[-1], 2) for _ in range(self.used_classes)])
 
-    def forward(self, inputs, labels):
+    def forward(self, inputs, labels=None):
         h_relu = inputs
         outputs, features = self.net(h_relu)
+        if labels is None:
+            # for inference
+            return outputs, features
         h_relu = F.relu(features)
         
         # Adversary classification component.
@@ -129,9 +135,12 @@ class CFairNet_MLP(nn.Module):
                                           for _ in range(self.used_classes)])
         self.sensitive_cls = nn.ModuleList([nn.Linear(self.num_adversaries[-1], 2) for _ in range(self.used_classes)])
         
-    def forward(self, inputs, labels):
+    def forward(self, inputs, labels=None):
         h_relu = inputs
         outputs, features = self.net(h_relu)
+        if labels is None:
+            # for inference
+            return outputs, features
         h_relu = F.relu(features)
         
         # Adversary classification component.

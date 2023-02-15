@@ -48,7 +48,7 @@ class CFair(BaseNet):
     def _train(self, loader):
         """Train the model for one epoch"""
         reweight_target_tensor, reweight_attr_tensors = self.get_reweight_tensor(model_name = 'cfair')
-        #self.criterion = nn.BCEWithLogitsLoss(pos_weight=reweight_target_tensor)
+        self._criterion = nn.BCEWithLogitsLoss(pos_weight=reweight_target_tensor)
         self.network.train()
         
         running_loss = 0.
@@ -60,9 +60,9 @@ class CFair(BaseNet):
             self.optimizer.zero_grad()
             ypreds, apreds = self.network.forward(images, targets)
             
-            loss = self._criterion(ypreds, targets, pos_weight=reweight_target_tensor)
+            loss = self._criterion(ypreds, targets)
             
-            adv_loss = torch.mean(torch.stack([F.nll_loss(apreds[j], sensitive_attr[targets == j], weight= reweight_attr_tensors[j]) for j in range(self.used_classes)]))
+            adv_loss = torch.mean(torch.stack([F.nll_loss(apreds[j], sensitive_attr[targets[:, 0] == j], weight= reweight_attr_tensors[j]) for j in range(self.used_classes)]))
             running_loss += loss.item()
             running_adv_loss += adv_loss.item()
             
