@@ -32,7 +32,6 @@ def collect_args():
                             'GSAM',
                             'SAMSWAD',
                             'GroupDRO',
-                            'DSBN',
                             'BayesCNN',
                             'resamplingSWAD',
                         ])
@@ -95,8 +94,6 @@ def collect_args():
     parser.add_argument('--model_var', type=str, default='laftr-eqodd', help='model variation for LAFTR')
     # CFair
     parser.add_argument('--mu', type=float, default=0.1, help='coefficient for adversarial loss of CFair')
-    # testing for CFair and LAFTR
-    parser.add_argument('--bianry_train_multi_test', type=int, default=-1, help = 'training with binary attributes and testing for multiple attributes -- the numeber of multiple sens attr')
     
     # LNL
     parser.add_argument('--_lambda', type=float, default=0.1, help='coefficient for loss of LNL')
@@ -133,10 +130,6 @@ def collect_args():
 
     # BayesCNN
     parser.add_argument("--num_monte_carlo", type=int, default=10, help="Rho parameter for SAM.")
-    
-    ## for 3d network
-    parser.add_argument('--input_size', type=int, default=224, help='input width&height of the 3d network')
-    parser.add_argument('--sample_duration', type=int, default=64, help='input depth of the 3d network')
     
     parser.set_defaults(cuda=True)
     
@@ -199,6 +192,10 @@ def create_exerpiment_setting(opt):
     
     if opt['experiment'] == 'DomainInd':
         opt['output_dim'] *= opt['sens_classes']
+    if opt['experiment'] == 'LAFTR' or opt['experiment'] == 'CFair':
+        opt['train_sens_classes'] = 2
+    else:
+        opt['train_sens_classes'] = opt['sens_classes']
 
     import wandb
     if opt['if_wandb'] == True:

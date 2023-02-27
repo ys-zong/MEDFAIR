@@ -53,12 +53,8 @@ class BaseNet(nn.Module):
         
         self.is_tabular = opt['is_tabular']
         self.is_3d = opt['is_3d']
-        if self.is_3d:
-            self.input_size = opt['input_size']
-            self.sample_duration = opt['sample_duration']
         
         self.dataset_name = opt['dataset_name']
-        self.bianry_train_multi_test = opt['bianry_train_multi_test']
         
         self.set_data(opt)
         if self.is_tabular:

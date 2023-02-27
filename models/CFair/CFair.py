@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 from models.CFair.model import CFairNet, CFairNet3D, CFairNet_MLP
 from utils import basics
@@ -13,7 +14,10 @@ from models.utils import standard_val, standard_test
 class CFair(BaseNet):
     def __init__(self, opt, wandb):
         super(CFair, self).__init__(opt, wandb)
-        
+
+        self.test_classes = opt['sens_classes']
+        self.sens_classes = 2
+
         self.set_network(opt)
         self.set_optimizer(opt)
 
@@ -47,7 +51,7 @@ class CFair(BaseNet):
 
     def _train(self, loader):
         """Train the model for one epoch"""
-        reweight_target_tensor, reweight_attr_tensors = self.get_reweight_tensor(model_name = 'cfair')
+        reweight_target_tensor, reweight_attr_tensors = self.get_reweight_tensor(model_name='cfair')
         self._criterion = nn.BCEWithLogitsLoss(pos_weight=reweight_target_tensor)
         self.network.train()
         
@@ -62,7 +66,7 @@ class CFair(BaseNet):
             
             loss = self._criterion(ypreds, targets)
             
-            adv_loss = torch.mean(torch.stack([F.nll_loss(apreds[j], sensitive_attr[targets[:, 0] == j], weight= reweight_attr_tensors[j]) for j in range(self.used_classes)]))
+            adv_loss = torch.mean(torch.stack([F.nll_loss(apreds[j], sensitive_attr[targets[:, 0] == j], weight= reweight_attr_tensors[j]) for j in range(self.sens_classes)]))
             running_loss += loss.item()
             running_adv_loss += adv_loss.item()
             
@@ -88,7 +92,7 @@ class CFair(BaseNet):
         """Compute model output on validation set"""
 
         self.network.eval()
-        auc, val_loss, log_dict, pred_df = standard_val(self.opt, self.network, loader, self._criterion, self.bianry_train_multi_test, self.wandb)
+        auc, val_loss, log_dict, pred_df = standard_val(self.opt, self.network, loader, self._criterion, self.test_classes, self.wandb)
         
         print('Validation epoch {}: validation loss:{}, AUC:{}'.format(
             self.epoch, val_loss, auc))
@@ -100,9 +104,7 @@ class CFair(BaseNet):
         self.network.eval()
         tol_output, tol_target, tol_sensitive, tol_index = standard_test(self.opt, self.network, loader, self._criterion, self.wandb)
         
-        self.sens_classes = self.bianry_train_multi_test
-        self.opt['sens_classes'] = self.bianry_train_multi_test
-        log_dict, t_predictions, pred_df = calculate_metrics(tol_output, tol_target, tol_sensitive, tol_index, self.bianry_train_multi_test)
+        log_dict, t_predictions, pred_df = calculate_metrics(tol_output, tol_target, tol_sensitive, tol_index, self.test_classes)
         overall_FPR, overall_FNR, FPRs, FNRs = calculate_FPR_FNR(pred_df, self.test_meta, self.opt)
         log_dict['Overall FPR'] = overall_FPR
         log_dict['Overall FNR'] = overall_FNR

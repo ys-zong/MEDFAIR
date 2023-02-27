@@ -10,8 +10,10 @@ from models.basenet import BaseNet
 class LAFTR(BaseNet):
     def __init__(self, opt, wandb):
         super(LAFTR, self).__init__(opt, wandb)
-        
+
         self.model_var = opt['model_var']
+        self.test_classes = opt['sens_classes']
+        self.sens_classes = 2
 
         self.set_network(opt)
         self.set_optimizer(opt)
@@ -19,7 +21,7 @@ class LAFTR(BaseNet):
         self.aud_steps = opt['aud_steps']
         self.class_coeff = opt['class_coeff']
         self.fair_coeff = opt['fair_coeff']
-        
+
     def set_network(self, opt):
         """Define the network"""
         if self.is_3d:
@@ -157,7 +159,7 @@ class LAFTR(BaseNet):
     def _val(self, loader):
         
         self.network.eval()
-        auc, val_loss, log_dict, pred_df = standard_val(self.opt, self.network, loader, self._criterion, self.bianry_train_multi_test, self.wandb)
+        auc, val_loss, log_dict, pred_df = standard_val(self.opt, self.network, loader, self._criterion, self.test_classes, self.wandb)
         
         print('Validation epoch {}: validation loss:{}, AUC:{}'.format(
             self.epoch, val_loss, auc))
@@ -168,13 +170,11 @@ class LAFTR(BaseNet):
         self.network.eval()
         tol_output, tol_target, tol_sensitive, tol_index = standard_test(self.opt, self.network, loader, self._criterion, self.wandb)
         
-        self.sens_classes = self.bianry_train_multi_test
-        self.opt['sens_classes'] = self.bianry_train_multi_test
-        log_dict, t_predictions, pred_df = calculate_metrics(tol_output, tol_target, tol_sensitive, tol_index, self.bianry_train_multi_test)
+        log_dict, t_predictions, pred_df = calculate_metrics(tol_output, tol_target, tol_sensitive, tol_index, self.test_classes)
         overall_FPR, overall_FNR, FPRs, FNRs = calculate_FPR_FNR(pred_df, self.test_meta, self.opt)
         log_dict['Overall FPR'] = overall_FPR
         log_dict['Overall FNR'] = overall_FNR
-        #pred_df.to_csv(os.path.join(self.save_path, 'pred.csv'), index = False)
+        
         for i, FPR in enumerate(FPRs):
             log_dict['FPR-group_' + str(i)] = FPR
         for i, FNR in enumerate(FNRs):
