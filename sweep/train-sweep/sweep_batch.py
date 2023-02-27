@@ -2,29 +2,42 @@ import os
 import subprocess
 import itertools
 import yaml
-import json
 import wandb
+import argparse
 
-is_3d = False
-is_tabular = True
+
+parser = argparse.ArgumentParser(description='Hyperparameter sweep.')
+
+parser.add_argument('--dataset_name', type=str, default='HAM10000', help='dataset name')
+parser.add_argument('--sensitive_name', type=str, default='Age', help='dataset name')
+parser.add_argument('--total_epochs', type=int, default=20, help='total epochs')
+parser.add_argument('--sens_classes', type=int, default=2, help='number of sensitive classes')
+parser.add_argument('--num_classes', type=int, default=1, help='number of classes')
+parser.add_argument('--val_strategy', type=str, default='worst_auc', help='validation strategy')
+parser.add_argument('--is_3d', type=bool, default=False, help='whether 3D dataset')
+parser.add_argument('--is_slurm', type=bool, default=True, help='whether using Slurm')
+parser.add_argument('--resample_which', type=str, default='class', help='what to resample')
+
+args = parser.parse_args()
+
+is_3d = args.is_3d
 if is_3d:
     backbone = 'cusResNet18_3d'
     batch_size = 8
-elif is_tabular:
-    backbone = 'cusMLP'
-    batch_size = 512
+#elif is_tabular:
+#    backbone = 'cusMLP'
+#    batch_size = 512
 else:
     batch_size = 1024
     
     
-sensitive_name = 'Age'
-dataset_name = 'PAPILA'
-total_epochs = 20
-output_dim = num_classes = 1
-val_strategy = 'worst_auc'
-sens_classes = 2
-bianry_train_multi_test = -1
-resample_which = 'class'
+sensitive_name = args.sensitive_name
+dataset_name = args.dataset_name
+total_epochs = args.total_epochs
+output_dim = num_classes = args.num_classes
+val_strategy = args.val_strategy
+sens_classes = args.sens_classes
+resample_which = args.resample_which
 
 methods = ['baseline', 'resampling', 'LAFTR', 'CFair', 'LNL', 'EnD', 'DomainInd', 'GroupDRO', 'ODR', 'SWAD', 'SAM']
     
@@ -33,12 +46,6 @@ for method in methods:
     print(method)
     project_name = '{dataset} {meth}'.format(dataset = dataset_name, meth = method)
     wandb.init(project=project_name)
-    
-    bianry_train_multi_test = -1
-    sens_classes = 5
-    if method in ['LAFTR', 'CFair']:
-        bianry_train_multi_test = 5
-        sens_classes = 2
 
     with open('sweep/train-sweep/sweep_{}.yaml'.format(method)) as file:
         config_dict = yaml.load(file, Loader=yaml.FullLoader)
@@ -56,14 +63,13 @@ for method in methods:
         command_list += ['--val_strategy', val_strategy]
         command_list += ['--sens_classes', sens_classes]
         
-        command_list += ['--bianry_train_multi_test', bianry_train_multi_test]
         command_list += ['--resample_which', resample_which]
         if is_3d:
             command_list += ['--is_3d', is_3d]
             command_list += ['--backbone', backbone]
-        elif is_tabular:
-            command_list += ['--is_tabular', is_3d]
-            command_list += ['--backbone', backbone]
+        #elif is_tabular:
+        #    command_list += ['--is_tabular', is_3d]
+        #    command_list += ['--backbone', backbone]
             
         config_dict['command'] = command_list
         #print(config_dict)
@@ -73,9 +79,12 @@ for method in methods:
     counts = 30
     
     for i in range(counts):
-               
-        MAIN_CMD = f"sbatch sweep/train-sweep/sweep_count.sh" \
-                   f" --sweep_id {sweep_id}" \
+        if args.is_slurm:
+            MAIN_CMD = f"sbatch sweep/train-sweep/slurm_sweep_count.sh" \
+                       f" --sweep_id {sweep_id}" 
+        else:
+            MAIN_CMD = f"bash sweep/train-sweep/sweep_count.sh" \
+                       f" --sweep_id {sweep_id}" \
         
         print('command is ', MAIN_CMD)
         CMD = MAIN_CMD.split(' ')
