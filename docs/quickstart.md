@@ -48,10 +48,11 @@ python main.py --experiment [experiment] --experiment_name [experiment_name] --d
 ```
 See `parse_args.py` for more options.
 
-### Run a grid search on a Slurm cluster
+### Run a grid search on a Slurm cluster/Regular Machine
 ```python
-python sweep/train-sweep/sweep_batch.py
+python sweep/train-sweep/sweep_batch.py --is_slurm True/False
 ```
+Set the other arguments as needed.
 
 
 ## Model selection and Results analysis

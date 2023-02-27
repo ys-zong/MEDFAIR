@@ -64,7 +64,7 @@ See `parse_args.py` for more options.
 ```python
 python sweep/train-sweep/sweep_batch.py --is_slurm True/False
 ```
-
+Set the other arguments as needed.
 
 ### Model selection and Results analysis
 See `notebooks/results_analysis.ipynb` for a step by step example.
