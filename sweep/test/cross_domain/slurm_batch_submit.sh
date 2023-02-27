@@ -1,5 +1,13 @@
+#!/bin/sh
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --partition ampere
+#SBATCH --gres=gpu:1
+#SBATCH --account your_account
+#SBATCH --time=00:30:30
+
 OPTIONS=d:
-LONGOPTS=experiment:,dataset_name:,sensitive_name:,output_dim:,num_classes:,batch_size:,cross_testing_model_path:,sens_classes:,backbone:,source_domain:,target_domain:
+LONGOPTS=experiment:,dataset_name:,sensitive_name:,output_dim:,num_classes:,batch_size:,cross_testing_model_path:,sens_classes:,backbone:,source_domain:,target_domain:,bianry_train_multi_test:
 
 # -regarding ! and PIPESTATUS see above
 # -temporarily store output to be able to check for errors
@@ -22,6 +30,7 @@ sens_classes=2
 cross_testing_model_path=""
 source_domain=""
 target_domain=""
+bianry_train_multi_test=""
 
 while true; do
     case "$1" in
@@ -69,6 +78,10 @@ while true; do
             target_domain="$2"
             shift 2
             ;;
+        --bianry_train_multi_test)
+            bianry_train_multi_test="$2"
+            shift 2
+            ;;
         --)
             shift
             break
@@ -81,4 +94,4 @@ while true; do
 done
 
 
-python main.py --experiment $experiment --dataset_name $dataset_name --experiment_name $wandb_name --sensitive_name $sensitive_name --output_dim $output_dim --num_classes $num_classes --batch_size $batch_size --sens_classes $sens_classes --cross_testing --cross_testing_model_path $cross_testing_model_path  --test_mode True --backbone $backbone --source_domain $source_domain --target_domain $target_domain
+python main.py --experiment $experiment --dataset_name $dataset_name --experiment_name $wandb_name --sensitive_name $sensitive_name --output_dim $output_dim --num_classes $num_classes --batch_size $batch_size --sens_classes $sens_classes --cross_testing --cross_testing_model_path $cross_testing_model_path  --test_mode True --backbone $backbone --source_domain $source_domain --target_domain $target_domain --bianry_train_multi_test $bianry_train_multi_test
