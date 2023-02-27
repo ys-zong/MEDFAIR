@@ -38,9 +38,6 @@ parameters:
         max: 1e-3
     weight_decay:
         value: 1e-5
-    #batch_size:
-    #    values:
-    #    - 1024
     total_epochs:
         value: 20
         

@@ -136,7 +136,6 @@ def collect_args():
     # logging 
     parser.add_argument('--log_freq', type=int, default=50, help = 'logging frequency (step)')
     
-    # opt = vars(parser.parse_args(['--experiment', 'CXP_baseline', '--experiment_name', 'e1']))
     opt = vars(parser.parse_args())
     opt = create_exerpiment_setting(opt)
     return opt
