@@ -28,14 +28,18 @@ class SWA(BaseNet):
     def set_network(self, opt):
         """Define the network"""
         
-        if not self.is_3d:
+        if self.is_3d:
+            mod = import_module("models.basemodels_3d")
+            cusModel = getattr(mod, self.backbone)
+            self.network = cusModel(n_classes=self.output_dim, pretrained = self.pretrained).to(self.device)
+        elif self.is_tabular:
+            mod = import_module("models.basemodels_mlp")
+            cusModel = getattr(mod, self.backbone)
+            self.network = cusModel(n_classes=self.output_dim, in_features= self.in_features, hidden_features = 1024).to(self.device)
+        else:
             mod = import_module("models.basemodels")
             cusModel = getattr(mod, self.backbone)
             self.network = cusModel(n_classes=self.output_dim, pretrained=self.pretrained).to(self.device)
-        else:
-            mod = import_module("models.basemodels_3d")
-            cusModel = getattr(mod, self.backbone)
-            self.network = cusModel(n_classes=self.output_dim, input_size = self.input_size, sample_duration = self.sample_duration).to(self.device)
         
         self.swa_model = AveragedModel(self.network).to(self.device)
 
