@@ -129,7 +129,7 @@ def update_bn(loader, model, device=None, is_testing = False):
 
     for input in loader:
         if isinstance(input, (list, tuple)):
-            input = input[1]
+            input = input[0]
         if device is not None:
             input = input.to(device)
 

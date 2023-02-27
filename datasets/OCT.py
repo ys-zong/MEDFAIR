@@ -1,8 +1,5 @@
 import torch
-import pickle
 import numpy as np
-from PIL import Image
-import pickle
 import os
 from datasets.BaseDataset import BaseDataset
 
@@ -23,4 +20,4 @@ class OCT(BaseDataset):
         
         sensitive = self.get_sensitive(self.sens_name, self.sens_classes, item)
         
-        return idx, img, label, sensitive
+        return img, label, sensitive, idx

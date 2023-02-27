@@ -1,8 +1,5 @@
 import torch
-import pickle
 import numpy as np
-from PIL import Image
-import pickle
 from datasets.BaseDataset import BaseDataset
 
 
@@ -24,4 +21,4 @@ class RadFusion_EHR(BaseDataset):
         
         sensitive = self.get_sensitive(self.sens_name, self.sens_classes, item)
                                
-        return idx, ehr, label, sensitive
+        return ehr, label, sensitive, idx

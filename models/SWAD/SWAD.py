@@ -72,7 +72,7 @@ class SWAD(SWA):
         train_loss = 0
         auc = 0.
         no_iter = 0
-        for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+        for i, (images, targets, sensitive_attr, index) in enumerate(loader):
             images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(self.device)
             
             self.optimizer.zero_grad()
@@ -111,7 +111,7 @@ class SWAD(SWA):
         val_loss, auc, worst_auc = 0., 0., 0.
         no_iter = 0
         with torch.no_grad():
-            for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+            for i, (images, targets, sensitive_attr, index) in enumerate(loader):
                 images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(
                     self.device)
                 outputs, features = self.network.inference(images)
@@ -220,7 +220,7 @@ class SWAD(SWA):
         tol_output, tol_target, tol_sensitive, tol_index = [], [], [], []
     
         with torch.no_grad():
-            for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+            for i, (images, targets, sensitive_attr, index) in enumerate(loader):
                 images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(
                     self.device)
                 outputs, _ = self.swad_model(images)
@@ -235,8 +235,7 @@ class SWAD(SWA):
         overall_FPR, overall_FNR, FPRs, FNRs = calculate_FPR_FNR(pred_df, self.test_meta, self.opt)
         log_dict['Overall FPR'] = overall_FPR
         log_dict['Overall FNR'] = overall_FNR
-        #pred_df.to_csv(os.path.join(self.save_path, 'pred.csv'), index = False)
-        #basics.save_results(t_predictions, tol_target, s_prediction, tol_sensitive, self.save_path)
+        
         for i, FPR in enumerate(FPRs):
             log_dict['FPR-group_' + str(i)] = FPR
         for i, FNR in enumerate(FNRs):

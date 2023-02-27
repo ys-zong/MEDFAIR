@@ -28,4 +28,4 @@ class HAM10000(BaseDataset):
         
         sensitive = self.get_sensitive(self.sens_name, self.sens_classes, item)
                                
-        return idx, img, label, sensitive
+        return img, label, sensitive, idx

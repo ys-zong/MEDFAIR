@@ -60,7 +60,7 @@ class BayesCNN(BaseNet):
         self.network.train()
         
         train_loss, auc, no_iter = 0, 0, 0
-        for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+        for i, (images, targets, sensitive_attr, index) in enumerate(loader):
             images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(self.device)
             
             self.optimizer.zero_grad()
@@ -97,7 +97,7 @@ class BayesCNN(BaseNet):
         val_loss, auc, worst_auc = 0., 0., 0.
         no_iter = 0
         with torch.no_grad():
-            for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+            for i, (images, targets, sensitive_attr, index) in enumerate(loader):
                 images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(
                     self.device)
                 
@@ -138,7 +138,7 @@ class BayesCNN(BaseNet):
         tol_output, tol_target, tol_sensitive, tol_index = [], [], [], []
     
         with torch.no_grad():
-            for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+            for i, (images, targets, sensitive_attr, index) in enumerate(loader):
                 images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(
                     self.device)
                 

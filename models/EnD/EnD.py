@@ -35,7 +35,7 @@ class EnD(BaseNet):
         running_adv_loss = 0.
         auc = 0.
         no_iter = 0
-        for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+        for i, (images, targets, sensitive_attr, index) in enumerate(loader):
             images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(
                 self.device)
             self.optimizer.zero_grad()
@@ -57,7 +57,6 @@ class EnD(BaseNet):
             if self.log_freq and (i % self.log_freq == 0):
                 self.wandb.log({'Training loss': running_loss / (i+1), 'Training AUC': auc / (i+1)})
             
-        #self.scheduler.step()
 
         running_loss /= no_iter
         running_adv_loss /= no_iter

@@ -9,7 +9,7 @@ from importlib import import_module
 def standard_train(opt, network, optimizer, loader, _criterion, wandb):
     """Train the model for one epoch"""
     train_loss, auc, no_iter = 0., 0., 0
-    for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+    for i, (images, targets, sensitive_attr, index) in enumerate(loader):
         images, targets, sensitive_attr = images.to(opt['device']), targets.to(opt['device']), sensitive_attr.to(opt['device'])
         optimizer.zero_grad()
         outputs, _ = network(images)
@@ -35,10 +35,10 @@ def standard_val(opt, network, loader, _criterion, sens_classes, wandb):
     """Compute model output on validation set"""
     tol_output, tol_target, tol_sensitive, tol_index = [], [], [], []
     
-    val_loss, auc, worst_auc = 0., 0., 0.
+    val_loss, auc = 0., 0.
     no_iter = 0
     with torch.no_grad():
-        for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+        for i, (images, targets, sensitive_attr, index) in enumerate(loader):
             images, targets, sensitive_attr = images.to(opt['device']), targets.to(opt['device']), sensitive_attr.to(
                 opt['device'])
             outputs, features = network.forward(images)
@@ -70,10 +70,9 @@ def standard_val(opt, network, loader, _criterion, sens_classes, wandb):
 def standard_test(opt, network, loader, _criterion, wandb):
     """Compute model output on testing set"""
     tol_output, tol_target, tol_sensitive, tol_index = [], [], [], []
-    #tol_features = []
 
     with torch.no_grad():
-        for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+        for i, (images, targets, sensitive_attr, index) in enumerate(loader):
             images, targets, sensitive_attr = images.to(opt['device']), targets.to(opt['device']), sensitive_attr.to(
                 opt['device'])
             outputs, features = network.forward(images)
@@ -84,31 +83,3 @@ def standard_test(opt, network, loader, _criterion, wandb):
             tol_index += index.numpy().tolist()
             
     return tol_output, tol_target, tol_sensitive, tol_index
-
-
-class EMA:
-    def __init__(self, label, num_classes=None, alpha=0.9):
-        self.label = label  # .cuda()
-        self.alpha = alpha
-        self.parameter = torch.zeros(label.size(0))
-        self.updated = torch.zeros(label.size(0))
-        self.num_classes = num_classes
-        self.max = torch.zeros(self.num_classes)  # .cuda()
-
-    def update(self, data, index, curve=None, iter_range=None, step=None):
-        self.parameter = self.parameter.to(data.device)
-        self.updated = self.updated.to(data.device)
-        index = index.to(data.device)
-
-        if curve is None:
-            #print('self.parameter[index].shape, self.updated[index].shape, data.shape')
-            #print(self.parameter[index].shape, self.updated[index].shape, data.shape)
-            self.parameter[index] = self.alpha * self.parameter[index] + (1 - self.alpha * self.updated[index]) * data
-        else:
-            alpha = curve ** -(step / iter_range)
-            self.parameter[index] = alpha * self.parameter[index] + (1 - alpha * self.updated[index]) * data
-        self.updated[index] = 1
-
-    def max_loss(self, label):
-        label_index = torch.where(self.label == label)[0]
-        return self.parameter[label_index].max()

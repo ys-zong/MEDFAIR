@@ -79,7 +79,7 @@ class SAMSWAD(SWA):
         train_loss = 0
         auc = 0.
         no_iter = 0
-        for i, (images, targets, sensitive_attr) in enumerate(loader):
+        for i, (images, targets, sensitive_attr, index) in enumerate(loader):
             images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(self.device)
             
             outputs, _ = self.network(images)
@@ -124,7 +124,7 @@ class SAMSWAD(SWA):
         val_loss, auc, worst_auc = 0., 0., 0.
         no_iter = 0
         with torch.no_grad():
-            for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+            for i, (images, targets, sensitive_attr, index) in enumerate(loader):
                 images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(
                     self.device)
                 outputs, features = self.network.inference(images)
@@ -236,7 +236,7 @@ class SAMSWAD(SWA):
         tol_output, tol_target, tol_sensitive, tol_index = [], [], [], []
     
         with torch.no_grad():
-            for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+            for i, (images, targets, sensitive_attr, index) in enumerate(loader):
                 images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(
                     self.device)
                 outputs, _ = self.swad_model(images)

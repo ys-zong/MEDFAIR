@@ -82,16 +82,11 @@ def get_dataset(opt):
     val_meta = pd.read_csv(data_setting['val_meta_path'])
     test_meta = pd.read_csv(data_setting['test_meta_path'])   
     
-    if opt['bianry_train_multi_test'] == -1:
-        val_test_classes = opt['sens_classes']
-    else:
-        val_test_classes = opt['bianry_train_multi_test']
-    
     if opt['is_3d']:
         dataset_name = getattr(datasets, opt['dataset_name'])
-        train_data = dataset_name(train_meta, image_path, opt['sensitive_name'], opt['sens_classes'], transform_train)
-        val_data = dataset_name(val_meta, image_path, opt['sensitive_name'], val_test_classes, transform_test)
-        test_data = dataset_name(test_meta, image_path, opt['sensitive_name'], val_test_classes, transform_test)
+        train_data = dataset_name(train_meta, image_path, opt['sensitive_name'], opt['train_sens_classes'], transform_train)
+        val_data = dataset_name(val_meta, image_path, opt['sensitive_name'], opt['sens_classes'], transform_test)
+        test_data = dataset_name(test_meta, image_path, opt['sensitive_name'], opt['sens_classes'], transform_test)
     elif opt['is_tabular']:
         # different format
         dataset_name = getattr(datasets, opt['dataset_name'])
@@ -103,18 +98,18 @@ def get_dataset(opt):
         data_val_df = pd.read_csv(data_val_path)
         data_test_df = pd.read_csv(data_test_path)
         
-        train_data = dataset_name(train_meta, data_train_df, opt['sensitive_name'], opt['sens_classes'], None)
-        val_data = dataset_name(val_meta, data_val_df, opt['sensitive_name'], val_test_classes, None)
-        test_data = dataset_name(test_meta, data_test_df, opt['sensitive_name'], val_test_classes, None)
+        train_data = dataset_name(train_meta, data_train_df, opt['sensitive_name'], opt['train_sens_classes'], None)
+        val_data = dataset_name(val_meta, data_val_df, opt['sensitive_name'], opt['sens_classes'], None)
+        test_data = dataset_name(test_meta, data_test_df, opt['sensitive_name'], opt['sens_classes'], None)
     
     else:
         dataset_name = getattr(datasets, opt['dataset_name'])
         pickle_train_path = data_setting['pickle_train_path']
         pickle_val_path = data_setting['pickle_val_path']
         pickle_test_path = data_setting['pickle_test_path']
-        train_data = dataset_name(train_meta, pickle_train_path, opt['sensitive_name'], opt['sens_classes'], transform_train)
-        val_data = dataset_name(val_meta, pickle_val_path, opt['sensitive_name'], val_test_classes, transform_test)
-        test_data = dataset_name(test_meta, pickle_test_path, opt['sensitive_name'], val_test_classes, transform_test)
+        train_data = dataset_name(train_meta, pickle_train_path, opt['sensitive_name'], opt['train_sens_classes'], transform_train)
+        val_data = dataset_name(val_meta, pickle_val_path, opt['sensitive_name'], opt['sens_classes'], transform_test)
+        test_data = dataset_name(test_meta, pickle_test_path, opt['sensitive_name'], opt['sens_classes'], transform_test)
     
     print('loaded dataset ', opt['dataset_name'])
         

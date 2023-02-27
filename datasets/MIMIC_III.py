@@ -24,4 +24,4 @@ class MIMIC_III(BaseDataset):
         
         sensitive = self.get_sensitive(self.sens_name, self.sens_classes, item)
 
-        return idx, t_feature, label, sensitive
+        return t_feature, label, sensitive, idx

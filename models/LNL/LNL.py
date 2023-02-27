@@ -68,7 +68,7 @@ class LNL(BaseNet):
         running_MI = 0.
         auc = 0.
         no_iter = 0
-        for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+        for i, (images, targets, sensitive_attr, index) in enumerate(loader):
             images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(self.device)
             self.optimizer.zero_grad()
 

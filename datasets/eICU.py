@@ -1,8 +1,5 @@
 import torch
-import pickle
 import numpy as np
-from PIL import Image
-import pickle
 from datasets.BaseDataset import BaseDataset
 
 
@@ -26,4 +23,4 @@ class eICU(BaseDataset):
         
         sensitive = self.get_sensitive(self.sens_name, self.sens_classes, item)
                                
-        return idx, s_feature, label, sensitive
+        return s_feature, label, sensitive, idx

@@ -42,7 +42,7 @@ class DomainInd(baseline):
         self.network.train()
         train_loss, auc, no_iter = 0, 0., 0
         
-        for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+        for i, (images, targets, sensitive_attr, index) in enumerate(loader):
             images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(
                     self.device)
             self.optimizer.zero_grad()

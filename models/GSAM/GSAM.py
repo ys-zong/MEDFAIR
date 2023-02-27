@@ -65,7 +65,7 @@ class GSAM(BaseNet):
         train_loss = 0
         auc = 0.
         no_iter = 0
-        for i, (index, images, targets, sensitive_attr) in enumerate(loader):
+        for i, (images, targets, sensitive_attr, index) in enumerate(loader):
             images, targets, sensitive_attr = images.to(self.device), targets.to(self.device), sensitive_attr.to(self.device)
             
             self.gsam_optimizer.set_closure(self._criterion, images, targets)
