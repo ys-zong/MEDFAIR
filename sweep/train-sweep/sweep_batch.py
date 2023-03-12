@@ -28,6 +28,7 @@ if is_3d:
 #    backbone = 'cusMLP'
 #    batch_size = 512
 else:
+    backbone = 'cusResNet18'
     batch_size = 1024
     
     
