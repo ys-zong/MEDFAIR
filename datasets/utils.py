@@ -26,7 +26,7 @@ def get_dataset(opt):
         if data_setting['augment']:
             transform_train = transforms.Compose([
                 tio.transforms.RandomFlip(),
-                tio.transforms.RandomAffine((-15, 15)),
+                tio.transforms.RandomAffine(scales=(0.9, 1.2), degrees=15,),
                 tio.transforms.CropOrPad(sizes[opt['dataset_name']]),
                 
                 ToTensor(),
