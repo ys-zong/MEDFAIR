@@ -72,11 +72,11 @@ See `notebooks/results_analysis.ipynb` for a step by step example.
 ## Citation
 Please consider cite our paper if you find this repo useful.
 ```
-@misc{2210.01725,
-Author = {Yongshuo Zong and Yongxin Yang and Timothy Hospedales},
-Title = {MEDFAIR: Benchmarking Fairness for Medical Imaging},
-Year = {2022},
-Eprint = {arXiv:2210.01725},
+@inproceedings{zong2023medfair,
+title={MEDFAIR: Benchmarking Fairness for Medical Imaging},
+author={Yongshuo Zong and Yongxin Yang and Timothy Hospedales},
+booktitle={International Conference on Learning Representations (ICLR)},
+year={2023},
 }
 ```
 
