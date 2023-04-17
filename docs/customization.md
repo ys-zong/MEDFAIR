@@ -5,7 +5,7 @@ In our benchmarking framework, you can easily add different datasets, network ar
 You can easily add any dataset you need following the three steps below.
 
 ### STEP 1. Configure dataset
-Preprocess the dataset and image files in a way similar to `preprocessing/HAM10000-example.ipynb`.
+Preprocess the dataset and image files in a way similar to `notebooks/HAM10000-example.ipynb`.
 
 ### STEP 2. Implement the Dataset Class
 We write the dataset class inheriting the regular Pytorch Dataset ([official tutorial](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html)). We provide a base dataset class in `datasets/BaseDataset.py`. In `datasets` folder, create a new script named after your dataset (e.g. `DatasetX.py`), and name the new dataset class with the same name as the script (i.e. `class DatasetX`). An example script is given below. The input paths need to be specified in `configs/datasets.json`. The comments in the code block below may be helpful.

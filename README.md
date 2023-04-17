@@ -1,8 +1,9 @@
 # MEDFAIR: Benchmarking Fairness for Medical Imaging
 
-MEDFAIR is a fairness benchmarking suite for medical imaging ([paper](https://arxiv.org/abs/2210.01725)). We are actively updating this repo and will incorporate more datasets and algorithms in the future. Contributions are warmly welcomed! Visit our [website](https://ys-zong.github.io/MEDFAIR/).
+MEDFAIR is a fairness benchmarking suite for medical imaging ([paper](https://arxiv.org/abs/2210.01725)). We are actively updating this repo and will incorporate more datasets and algorithms in the future. Contributions are warmly welcomed! 
+Check our [website](https://ys-zong.github.io/MEDFAIR/) for a brief summary of the paper.
 
-:grinning: MEDFAIR is accepted to ICLR'23 as Spotlight!
+:grinning: MEDFAIR is accepted to ICLR'23 as *Spotlight*!
 
 A few updates coming soon!
 - [ ] Even simpler interface
@@ -42,7 +43,7 @@ Due to the data use agreements, we cannot directly share the download link. Plea
 
 
 ### Data Preprocessing
-See `preprocessing/HAM10000.ipynb` for an simple example of how to preprocess the data into desired format.
+See `notebooks/HAM10000.ipynb` for an simple example of how to preprocess the data into desired format. You can also find other preprocessing scripts for corresponding datasets.
 Basically, it contains 3 steps:
 1. Preprocess metadata.
 2. Split to train/val/test set
@@ -66,7 +67,6 @@ python main.py --experiment baseline --dataset_name HAM10000 \
      --sens_classes 2 --output_dim 1 --num_classes 1
 ```
 
-
 See `parse_args.py` for more options.
 
 ### Run a grid search on a Slurm cluster/Regular Machine
@@ -79,13 +79,13 @@ Set the other arguments as needed.
 See `notebooks/results_analysis.ipynb` for a step by step example.
 
 ## Citation
-Please consider cite our paper if you find this repo useful.
+Please consider citing our paper if you find this repo useful.
 ```
 @inproceedings{zong2023medfair,
-title={MEDFAIR: Benchmarking Fairness for Medical Imaging},
-author={Yongshuo Zong and Yongxin Yang and Timothy Hospedales},
-booktitle={International Conference on Learning Representations (ICLR)},
-year={2023},
+    title={MEDFAIR: Benchmarking Fairness for Medical Imaging},
+    author={Yongshuo Zong and Yongxin Yang and Timothy Hospedales},
+    booktitle={International Conference on Learning Representations (ICLR)},
+    year={2023},
 }
 ```
 
