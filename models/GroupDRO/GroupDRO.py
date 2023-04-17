@@ -8,7 +8,6 @@ from utils import basics
 from utils.evaluation import calculate_auc, calculate_metrics, calculate_FPR_FNR
 from models.basenet import BaseNet
 from importlib import import_module
-import torchvision
 from models.GroupDRO.utils import LossComputer
     
     
@@ -44,6 +43,22 @@ class GroupDRO(BaseNet):
             btl=False,
             min_var_weight=0)
     
+    def set_network(self, opt):
+        """Define the network"""
+        
+        if self.is_3d:
+            mod = import_module("models.basemodels_3d")
+            cusModel = getattr(mod, self.backbone)
+            self.network = cusModel(n_classes=self.output_dim, pretrained = self.pretrained).to(self.device)
+        elif self.is_tabular:
+            mod = import_module("models.basemodels_mlp")
+            cusModel = getattr(mod, self.backbone)
+            self.network = cusModel(n_classes=self.output_dim, in_features= self.in_features, hidden_features = 1024).to(self.device)
+        else:
+            mod = import_module("models.basemodels")
+            cusModel = getattr(mod, self.backbone)
+            self.network = cusModel(n_classes=self.output_dim, pretrained=self.pretrained).to(self.device)
+
     def _train(self, loader):
         """Train the model for one epoch"""
         self.network.train()
