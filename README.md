@@ -58,6 +58,15 @@ python main.py --experiment [experiment] --experiment_name [experiment_name] --d
      --batch_size [batch_size] --lr [lr] --sens_classes [sens_classes]  --val_strategy [val_strategy] \
      --output_dim [output_dim] --num_classes [num_classes]
 ```
+
+For example, for running `ERM` in `HAM10000` dataset with `Sex` as the sensitive attribute:
+```python
+python main.py --experiment baseline --dataset_name HAM10000 \
+     --total_epochs 20 --sensitive_name Sex --batch_size 1024 \
+     --sens_classes 2 --output_dim 1 --num_classes 1
+```
+
+
 See `parse_args.py` for more options.
 
 ### Run a grid search on a Slurm cluster/Regular Machine
