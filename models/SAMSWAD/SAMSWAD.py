@@ -45,7 +45,7 @@ class SAMSWAD(SWA):
             cusModel = getattr(mod, self.backbone)
             self.network = cusModel(n_classes=self.output_dim, pretrained=self.pretrained).to(self.device)
         
-        self.swa_model = AveragedModel(self.network).to(self.device)
+        self.swad_model = AveragedModel(self.network).to(self.device)
 
     def forward(self, x):
         out, feature = self.network(x)
