@@ -33,7 +33,7 @@ class SAM(BaseNet):
        
     def set_optimizer(self, opt):
         optimizer_setting = opt['optimizer_setting']
-        self.base_optimizer = torch.optim.SGD
+        self.base_optimizer = torch.optim.Adam
         self.optimizer = SAM_optimizer(params = self.network.parameters(), base_optimizer = self.base_optimizer, rho=opt['rho'], adaptive=opt['adaptive'], lr=optimizer_setting['lr'], weight_decay=optimizer_setting['weight_decay'])
         
         self.scheduler = CosineAnnealingLR(self.optimizer.base_optimizer, T_max=opt['T_max'])

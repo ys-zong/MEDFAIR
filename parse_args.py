@@ -157,14 +157,14 @@ def create_exerpiment_setting(opt):
     basics.creat_folder(opt['save_folder'])
     
     optimizer_setting = {
-        'optimizer': torch.optim.SGD,
+        'optimizer': torch.optim.Adam,
         'lr': opt['lr'],
         'weight_decay': opt['weight_decay'],
     }
     opt['optimizer_setting'] = optimizer_setting
     
     optimizer_setting2 = {
-        'optimizer': torch.optim.SGD,
+        'optimizer': torch.optim.Adam,
         'lr': opt['lr'],
         'weight_decay': opt['weight_decay'],
     }

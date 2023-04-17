@@ -38,7 +38,7 @@ class GSAM(BaseNet):
 
     def set_optimizer(self, opt):
         optimizer_setting = opt['optimizer_setting']
-        self.base_optimizer = torch.optim.SGD(
+        self.base_optimizer = torch.optim.Adam(
             params=self.network.parameters(),
             lr=optimizer_setting['lr'],
             weight_decay=optimizer_setting['weight_decay']
