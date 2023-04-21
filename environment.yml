@@ -36,7 +36,6 @@ dependencies:
     - anyio==3.6.1
     - anykeystore==0.2
     - anyqt==0.1.1
-    - apex==0.1
     - argon2-cffi==21.3.0
     - argon2-cffi-bindings==21.2.0
     - arrow==1.2.2
