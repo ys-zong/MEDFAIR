@@ -5,12 +5,6 @@ Check our [website](https://ys-zong.github.io/MEDFAIR/) for a brief summary of t
 
 :grinning: MEDFAIR is accepted to ICLR'23 as *Spotlight*!
 
-A few updates coming soon!
-- [ ] Even simpler interface
-- [ ] Further code cleaning
-- [ ] More model selection strategies
-- [ ] More detailed documents
-
 ## Documentation
 A detailed documentation can be found [here](https://github.com/ys-zong/MEDFAIR/blob/main/docs/index.md).
 
